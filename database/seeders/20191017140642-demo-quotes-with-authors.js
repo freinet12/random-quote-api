@@ -40,7 +40,8 @@ module.exports = {
           description: faker.lorem.sentences(5),
           authorId: authorRows[i].id,
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
+          category: faker.lorem.word()
         };
 
         fakeQuotes.push(quoteData);

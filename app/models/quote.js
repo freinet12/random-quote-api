@@ -1,4 +1,7 @@
 'use strict';
+
+const sequelizePaginate = require('sequelize-paginate');
+
 module.exports = (sequelize, DataTypes) => {
   const Quote = sequelize.define('Quote', {
     description: {
@@ -14,5 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE',
     });
   };
+  sequelizePaginate.paginate(Quote);
   return Quote;
 };
