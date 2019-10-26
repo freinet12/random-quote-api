@@ -1,4 +1,6 @@
 'use strict';
+const sequelizePaginate = require('sequelize-paginate');
+
 module.exports = (sequelize, DataTypes) => {
   const Author = sequelize.define('Author', {
     name: {
@@ -19,5 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       as: 'quotes',
     });
   };
+  sequelizePaginate.paginate(Author);
   return Author;
 };

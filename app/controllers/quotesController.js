@@ -1,19 +1,33 @@
+'use strict';
+
 const models = require('../models');
 const Author = models.Author;
 const Quote = models.Quote;
 
 
-module.exports =  {
-
+const $this = module.exports = {
     // return all quotes
-    async index (req, res) {
+    index: async  (req, res) => {
 
-        console.log(req.query);
+        let filters = {};
+
+        // add authorId filter
+        if (req.query.authorId){
+            filters.authorId = req.query.authorId;
+        }
+        // add category filter
+        if (req.query.category) {
+            filters.category = req.query.category;
+        }
+
         const options = {
             include: [{model: Author}],
+            where: filters,
             order: [['updatedAt', 'DESC']],
+            //page parameter used for paginating
             page: req.query.page ? req.query.page : 1,
             paginate: 10,
+            
         };
 
         try {
@@ -29,7 +43,7 @@ module.exports =  {
     },
 
     // return a single quote
-    show (req, res) {
+    show: (req, res) => {
 
         Quote.findAll({
             include: [{model: Author}],
@@ -46,97 +60,69 @@ module.exports =  {
         });
     },
 
-    // return quotes by author id
-    findByAuthor (req, res) {
+    //add a new quote
+    store: (req, res) => {
 
-        Quote.findAll({
-            include: [{model: Author}],
-            order: [['updatedAt', 'DESC']],
-            where: {
-                authorId: req.params.id
-            }
+        Quote.create({
+            description: req.body.description,
+            category: req.body.category,
+            authorId: req.body.authorId
         })
-        .then( (quotes) => {
-            return res.status(200).json(quotes);
+        .then( (quote) => {
+            return res.status(200).json(quote);
 
         }).catch( (err) => {
-            return res.status(400).json(err);
-        });
+            return res.status(400).json({
+                'error': err.original.code
+            });
+        })
+        
     },
 
-    // return quotes by category
-    findByCategory (req, res) {
-        //console.log(req.params);
-        Quote.findAll({
-            include: [{model: Author}],
-            order: [['updatedAt', 'DESC']],
+
+    //update an existing quote
+    update: (req, res) => {
+
+        Quote.update({
+            // values to update
+            description: req.body.description ? req.body.description : Quote.description,
+            category: req.body.category ? req.body.category : Quote.category,
+            authorId: req.body.authorId ? req.body.authorId : Quote.authorId,
+        }, 
+        {
+            // where clause
             where: {
-                category: req.params.category
+                id: req.params.id 
             }
         })
-        .then( (quotes) => {
-            return res.status(200).json(quotes);
-
+        .then( (quote) => {
+            
+         return $this.show(req, res);
+         
         }).catch( (err) => {
-            return res.status(400).json(err);
-        });
+            return res.status(400).json({
+                'error': err.original.code
+            });
+        })
+
     },
 
-    update (req, res) {
+    //delete an existing quote
+    destroy: (req, res) => {
 
+        Quote.destroy({
+            where: {
+                id: req.params.id
+            }
+        }).then( () => {
+            return $this.index(req, res);
+
+        }).catch( (err) => {
+            return res.status(400).json({
+                'error': err.original.code
+            })
+        });
     }
-
 
 
 }
-
-
-/*class quotesController 
-{
-    // constructor will accept request and response params from the api router
-    constructor(request, response){
-        this.req = request;
-        this.res = response;
-    }
-    // get all quotes
-    index() 
-    {
-       Quote.findAll({
-           include: [{model: Author}]
-
-       }).then( (quotes) => {
-           return this.res.json(quotes);
-       });
-
-    }
-
-    //get a specific quote
-    show()
-    {
-
-    }
-
-    //create a new quote
-    store()
-    {
-        
-    }
-
-    // edit an existing quote
-    update()
-    {
-
-    }
-
-    //delete an existing quote
-
-    destroy()
-    {
-
-    }
-
-};
-
-module.exports = (arg1, arg2) => {
-    return new quotesController(arg1, arg2);
-};*/

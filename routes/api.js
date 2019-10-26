@@ -14,11 +14,12 @@ module.exports = ( function() {
     router.get('/quotes', quotesCtrl.index);
     // get a single quote by id
     router.get('/quotes/:id', quotesCtrl.show);
-    // get quotes by author
-    router.get('/quotes/author/:id', quotesCtrl.findByAuthor);
-    // get quotes by category
-    router.get('/quotes/category/:category', quotesCtrl.findByCategory);
-
+    //ad a new quote
+    router.post('/quotes', quotesCtrl.store);
+    //edit an existing quote
+    router.patch('/quotes/:id', quotesCtrl.update);
+    //delete a quote
+    router.delete('/quotes/:id', quotesCtrl.destroy);
 
 
     /**
@@ -26,12 +27,15 @@ module.exports = ( function() {
     */
 
     // get all authors
-    //router.get('/authors', authorsCtrl.index);
+    router.get('/authors', authorsCtrl.index);
     //get a single author by id
-    //router.get('authors/:id', authorsCtrl.show);
-
-
-
+    router.get('/authors/:id', authorsCtrl.show);
+    //add a new author
+    router.post('/authors', authorsCtrl.store);
+    //edit an existing quote
+    router.patch('/authors/:id', authorsCtrl.update);
+    //delete a quote
+    router.delete('/authors/:id', authorsCtrl.destroy);
 
 
 

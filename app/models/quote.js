@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT('long'),
       allowNull: false
     },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }
 
   }, {});
   Quote.associate = function(models) {
