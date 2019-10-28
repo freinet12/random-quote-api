@@ -15,6 +15,7 @@ const $this = module.exports = {
         if (req.query.authorId){
             filters.authorId = req.query.authorId;
         }
+        
         // add category filter
         if (req.query.category) {
             filters.category = req.query.category;

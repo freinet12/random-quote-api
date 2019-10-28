@@ -1,8 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Nunito', sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
+
+.nav-item > a{
+  font-size: 18px;
+}
+
+header{
+  padding-bottom: 2%;
+}
+
+h1{
+  font-size: 50px;
+}
+
+.card{
+  margin-top: 5%;
+}
+
+code{
+  background-color: #F1F1F1;
+  padding: 1%;
+  border-radius: 10px;
+}
+
+.try-it{
+  color: #fff!important;
+  cursor: pointer;
+  margin-left: 1%;
+}
+

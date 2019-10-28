@@ -1,2 +1,145 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<main class="container">
+
+    <header class="text-center">
+        <h1>{{title}}</h1>
+        <a class="nav-link" href="#"><span class="badge badge-pill badge-info"> Clone it on GitHub <i class="fab fa-github"></i></span></a>
+    </header>
+
+    <p class="text-center">Built With:</p>
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" href="#">NodeJs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Express</a>
+        </li>
+        <li class="nav-item">
+           <a class="nav-link" href="#">MySQL</a>
+        </li>
+        <li class="nav-item">
+           <a class="nav-link" href="#">Sequelize</a>
+        </li>
+        
+    </ul>
+
+    <div class="getting-started card">
+        <div class="card-header">
+            <h4 class="text-center">About</h4>
+        </div>
+
+        <div class="card-body">
+            <p class="text-center">This is a simple CRUD API which allows a user to do the following:</p><br>
+            <div class="row">
+                <div class="col-sm-6">
+                    <ul>
+                        <li>Get all quotes from a database</li>
+                        <li>Get a single quote from the database</li>
+                        <li>Add a new quote to the database</li>
+                        <li>Update an existing quote in the databse</li>
+                        <li>Delete a quote from the database</li>
+                    </ul>
+                </div>
+    
+                <div class="col-sm-6">
+                    <ul>
+                        <li>Get all authors from a database</li>
+                        <li>Get a single author from the database</li>
+                        <li>Add a new author to the database</li>
+                        <li>Update an existing author in the databse</li>
+                        <li>Delete an author from the database</li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <p>All API calls use the <code>/api/</code> prefix. All responses are in JSON format.</p>
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">Example - Get All Quotes</h4>
+            
+        </div>
+        <div class="card-body">
+            <b><p>Get All Quotes</p></b>
+
+            <p>
+                Calling the following endpoint will return all quotes from the database: 
+                <code>
+                    /api/quotes
+                </code>
+            </p>
+             <p>
+                 Note: The results are paginated (10 per page) <br>
+
+                 To navigate through the pages, use the optional "page" parameter. <br>For example, if you want to navigate to page 2, you would do something like this:
+
+                 <code>/api/quotes?page=2</code>
+             </p>
+             <p>
+                 You can also return quotes based on a specific authorId like this: <code>/api/quotes?authorId=13</code>
+             </p> 
+        </div>
+        <div class="card-footer">
+            Try it <i class="far fa-hand-point-right"></i> <a class="btn btn-primary try-it" href="/api/quotes" target="_blank">Get All Quotes</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">Example - Get a Single Quote</h4>
+        </div>
+        <div class="card-body">
+            <b><p>Get a Single Quotes</p></b>
+
+            <p>
+                Calling the following endpoint will return a quote with the ID of 2: 
+                <code>
+                    /api/quotes/2
+                </code>
+            </p>
+        </div>
+        <div class="card-footer">
+             Try it <i class="far fa-hand-point-right"></i> <a class="btn btn-primary try-it" href="/api/quotes/13" target="_blank">Get a Single Quotes</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center"> Example - Get All Authors</h4>
+        </div>
+        <div class="card-body">
+            <b><p>Get All Authors</p></b>
+
+            <p>
+                To get a list of all authors, call the following endpoint: <code>/api/authors</code>
+            </p>
+            <p>
+                Just like in the Quotes example, results are paginated.
+            </p>
+
+        </div>
+        <div class="card-footer">
+            Try it <i class="far fa-hand-point-right"></i> <a class="btn btn-primary try-it" href="/api/authors" target="_blank">Get All Authors</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="text-center">Example - Get a Single Author</h4>
+        </div>
+        <div class="card-body">
+            <b><p>get a Single Author</p></b>
+
+            <p>
+                You can get a single author by id, or by author name.<br><br>
+                Get author by id: <code>/api/authors/12</code> <br> <br>
+                Get author by name: <code>/api/authors?authorName=Deborah%20Larkin</code>
+            </p>
+        </div>
+        <div class="card-footer">
+            Try it <i class="far fa-hand-point-right"></i> <a class="btn btn-primary try-it" href="/api/authors/13" target="_blank">Get a Single Author</a>
+        </div>
+    </div>
+</main>
+

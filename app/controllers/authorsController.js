@@ -8,8 +8,16 @@ const $this = module.exports = {
     // return all quotes
     index: async  (req, res) => {
 
+        let filters = {};
+
+        //add author name filter
+        if (req.query.authorName){
+            filters.name = req.query.authorName;
+        }
+
         const options = {
             order: [['updatedAt', 'DESC']],
+            where: filters,
             //page parameter used for paginating
             page: req.query.page ? req.query.page : 1,
             paginate: 10,
@@ -30,6 +38,7 @@ const $this = module.exports = {
 
     // return a single quote
     show: (req, res) => {
+
 
         Author.findAll({
             where: {
@@ -92,20 +101,72 @@ const $this = module.exports = {
     //delete an existing author
     destroy: (req, res) => {
 
-      //TODO: delete all quotes associated with that author? or Set the authorId for those quotes to null?
+      //delete all quotes associated with that author? or Set the authorId for those quotes to null?
+      // maybe not the best solution, but it works for now...
 
-        Author.destroy({
-            where: {
-                id: req.params.id
-            }
-        }).then( () => {
-            return $this.index(req, res);
-
-        }).catch( (err) => {
-            return res.status(400).json({
-                'error': err.original.code
+        // delete the author
+        function deleteAuthor(){
+            Author.destroy({
+                where: {
+                    id: req.params.id
+                }
+            }).then( () => {
+                return $this.index(req, res);
+    
+            }).catch( (err) => {
+                return res.status(400).json({
+                    'error': err.original.code
+                })
+            });
+        };
+        // update the quotes' authorId to null before deleting the author
+        function updateQuoteFirst(){
+            Quote.update({
+                // values to update
+                authorId: null,
+            }, 
+            {
+                // where clause
+                where: {
+                    authorId: req.params.id 
+                }
             })
-        });
+            .then( () => {
+                deleteAuthor();
+            
+            }).catch( (err) => {
+                return res.status(400).json({
+                    'error': err.original.code
+                });
+            })
+        };
+        
+        if (req.query.deleteQuotes){
+
+                if (req.query.deleteQuotes === 'true'){
+                    Quote.destroy({
+                        where: {
+                            authorId: req.params.id
+                        }
+                    })
+                    .then( () => {
+                        deleteAuthor();
+                    })
+                    .catch( (err) => {
+                        return res.status(400).json({
+                            'error': err.original.code
+                        })
+                    })
+                } else {
+                    updateQuoteFirst();
+                }  
+            
+        } else {
+            updateQuoteFirst()
+        }
+
+
+        
     }
 
 

@@ -44,21 +44,4 @@ module.exports = ( function() {
 })();
 
 
-/*
-// get all quotes
-router.get('/quotes', (req, res) => {
-    return quotesCtrl(req, res).index();
-});
-
-// get all authors
-router.get('/authors', (req, res) => {
-    return authorsCtrl(req, res).index();
-});
-
-
-
-
-module.exports = router;*/
-
-
 
