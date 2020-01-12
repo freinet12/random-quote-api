@@ -16,6 +16,7 @@ I built this for freeCodeCamp's <a href="https://bit.ly/332WdHJ" >Random Quote M
       - Open the .env-example file and update the necessary database configs (database username, database password, database host, etc)<br><br>
       - CD into the random-quote-api project and run <code>npx sequelize db:migrate </code> to migrate the database tables. (make sure your MySQL server is running)
          <br><br>
+      - Run <code>npx sequelize db:migrate</code> to run the migrations and create all the database tables
       - Run <code>npx sequelize db:seed:all</code> to seed the database with fake data generated with <a href="https://www.npmjs.com/package/faker">Faker</a>
          <br><br>
       - run <code>npm start </code> to run the app
