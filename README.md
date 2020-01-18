@@ -14,8 +14,7 @@ I built this for freeCodeCamp's <a href="https://bit.ly/332WdHJ" >Random Quote M
          - If you're on Windows, you can use <a href="https://www.apachefriends.org/index.html">XAMPP</a> 
              or <a href="https://sourceforge.net/projects/wampserver/">WAMP</a><br><br>
       - Open the .env-example file and update the necessary database configs (database username, database password, database host, etc)<br><br>
-      - CD into the random-quote-api project and run <code>npx sequelize db:migrate </code> to migrate the database tables. (make sure your MySQL server is running)
-         <br><br>
+      - Run <code>npx sequelize db:migrate</code> to run the migrations and create all the database tables (make sure MSQL is running)
       - Run <code>npx sequelize db:seed:all</code> to seed the database with fake data generated with <a href="https://www.npmjs.com/package/faker">Faker</a>
          <br><br>
       - run <code>npm start </code> to run the app
