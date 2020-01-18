@@ -8,7 +8,7 @@ const faker = require('faker');
 */ 
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
+   up: async (queryInterface, Sequelize) => {
 
     // create 20 fake authors
     let fakeAuthors = [];
@@ -26,9 +26,9 @@ module.exports = {
 
     // insert fake authors to db
     await queryInterface.bulkInsert('Authors', fakeAuthors);
-
+  
     // get author ids
-    const authors = await queryInterface.sequelize.query(`SELECT id from AUTHORS;`);
+    const authors = await queryInterface.sequelize.query(`SELECT id from Authors;`);
     const authorRows = authors[0];
 
     // create 20 fake quotes
@@ -59,3 +59,5 @@ module.exports = {
 
   }
 };
+
+
